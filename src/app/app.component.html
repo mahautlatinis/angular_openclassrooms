@@ -3,10 +3,13 @@
     <div class="col-xs-12">
       <h2>Mes tools</h2>
       <ul class="list-group">
-        <app-tool></app-tool>
-        <app-tool></app-tool>
-        <app-tool></app-tool>
+        <app-tool *ngFor="let appareil of appareils"
+                  [appareilName]="appareil.name"
+                  [appareilStatus]="appareil.status"></app-tool>
       </ul>
+      <button class="btn btn-success"
+              [disabled]="!isAuth"
+              (click)="onAllumer()">Tout allumer</button>
     </div>
   </div>
 </div>

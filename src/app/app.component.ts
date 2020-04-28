@@ -6,5 +6,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Nopest';
+  isAuth = false;
+
+  appareils = [
+    {
+      name: 'Machine à laver',
+      status: 'allumé'
+    },
+    {
+      name: 'Télévision',
+      status: 'allumé'
+    },
+    {
+      name: 'Ordinateur',
+      status: 'éteint'
+    }
+  ];
+
+  constructor() {
+    setTimeout(
+        () => {
+          this.isAuth = true;
+        }, 4000
+    )
+  }
+
+  onAllumer() {
+      console.log("On allume tout !");
+  }
+
 }
+
