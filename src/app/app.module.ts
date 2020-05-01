@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { FirstComponentComponent } from './first-component/first-component.component';
 import { ToolComponent } from './tool/tool.component';
 
+//import du service qu'il faut ajouter dans le tableau providers
+import { AppareilService } from './services/appareil.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +19,9 @@ import { ToolComponent } from './tool/tool.component';
     BrowserModule,
       FormsModule
   ],
-  providers: [],
+  providers: [
+      AppareilService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

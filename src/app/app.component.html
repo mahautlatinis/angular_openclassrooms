@@ -4,13 +4,15 @@
       <h2>Mes tools</h2>
       <p>Mise à jour {{ lastUpdate | async | date: 'yMMMMEEEEd' | uppercase }}</p>
       <ul class="list-group">
-        <app-tool *ngFor="let appareil of appareils"
+        <app-tool *ngFor="let appareil of appareils; let i = index"
+                  [indexOfAppareil]="i"
                   [appareilName]="appareil.name"
                   [appareilStatus]="appareil.status"></app-tool>
       </ul>
       <button class="btn btn-success"
-              [disabled]="!isAuth"
               (click)="onAllumer()">Tout allumer</button>
+      <button class="btn btn-danger"
+              (click)="onEteindre()">Tout eteindre</button>
     </div>
   </div>
 </div>
