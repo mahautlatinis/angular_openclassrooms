@@ -20,6 +20,7 @@ import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import {UserService} from "./services/user.service";
 import { NewUserComponent } from './new-user/new-user.component';
+import { HttpClientModule} from "@angular/common/http";
 
 //Utiliser des routes dans notre application (single page application)
 const appRoutes: Routes = [
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
     BrowserModule,
       FormsModule,
       RouterModule.forRoot(appRoutes),
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      HttpClientModule
   ],
   //Mentionner les differents services
   providers: [

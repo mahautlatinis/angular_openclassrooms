@@ -1,26 +1,15 @@
 import {Subject} from 'rxjs/Subject';
+import { HttpClient } from "@angular/common/http";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class AppareilService {
 
     appareilSubject = new Subject();
 
-    private appareils = [
-        {
-            id: 1,
-            name: 'Machine a laver',
-            status: 'allume'
-        },
-        {
-            id: 2,
-            name: 'Television',
-            status: 'allume'
-        },
-        {
-            id: 3,
-            name: 'Ordinateur',
-            status: 'eteint'
-        }
-    ];
+    private appareils = [];
+
+    constructor(private httpClient: HttpClient) {}
 
     emitAppareilSubject() {
         this.appareilSubject.next(this.appareils.slice());
@@ -72,4 +61,32 @@ export class AppareilService {
         this.appareils.push(appareilObject);
         this.emitAppareilSubject();
     }
+    //A la fin de l'url on ajoute le path via lequel on veut enregistrer les appareils
+    saveAppareilstoServer() {
+        this.httpClient
+            .put('https://angularoc-cf1b6.firebaseio.com/appareils.json', this.appareils)
+            .subscribe(
+                //Pour reagir a la réponse du serveur
+                () => {
+                  console.log('enregistrement termine');
+                }, (error) => {
+                    console.log('Erreur de sauvegarde' + error);
+                }
+            );
+    }
+
+    getAppareilsFromServer() {
+        this.httpClient
+            .get<any[]>('https://angularoc-cf1b6.firebaseio.com/appareils.json')
+            .subscribe(
+                (response) => {
+                    this.appareils = response;
+                    this.emitAppareilSubject();
+                },
+                (error) => {
+                    console.log('Erreur de chargement' + error);
+                }
+            );
+    }
 }
+
